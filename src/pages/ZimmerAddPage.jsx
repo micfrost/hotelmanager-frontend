@@ -47,7 +47,7 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
         }
 
         if (existingZimmernummern.includes(Number(value))) {
-            setZimmernummerError('ZimmerDetail existiert bereits');
+            setZimmernummerError('Zimmer existiert bereits');
             return false;
         }
 

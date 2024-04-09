@@ -19,7 +19,7 @@ const ZimmerCard = ({hotelzimmer}) => {
                     </div>
 
                     <div className="mt-2 mb-2">
-                        {hotelzimmer.frei ? "Das ZimmerDetail ist frei" : "Das ZimmerDetail ist belegt"}
+                        {hotelzimmer.frei ? "Das Zimmer ist frei" : "Das Zimmer ist belegt"}
                     </div>
                     <div className="border border-gray-100 mb-5"></div>
                 </div>

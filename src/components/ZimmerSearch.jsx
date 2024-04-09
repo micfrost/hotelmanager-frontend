@@ -38,12 +38,12 @@ const ZimmerSearch = () => {
     // Validate search room number
     const validateSearchRoomNumber = (value) => {
         if (value && (isNaN(value) || Number(value) <= 0)) {
-            setSearchRoomNumberError('ZimmerDetail existiert nicht');
+            setSearchRoomNumberError('Zimmer existiert nicht');
             return false;
         }
 
         if (!existingZimmernummern.includes(Number(value))) {
-            setSearchRoomNumberError('ZimmerDetail existiert nicht');
+            setSearchRoomNumberError('Zimmer existiert nicht');
             return false;
         }
 
