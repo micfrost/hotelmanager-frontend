@@ -22,7 +22,7 @@ const App = () => {
 
     // CREATE
     const addHotelzimmer = async (newHotelzimmer) => {
-        const response = await fetch('http://localhost:8080/api/hotelzimmer', {
+        await fetch('http://localhost:8080/api/hotelzimmer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const App = () => {
 
     // UPDATE
     const updateHotelzimmer = async (hotelzimmer) => {
-        const response = await fetch(`http://localhost:8080/api/hotelzimmer`, {
+        await fetch(`http://localhost:8080/api/hotelzimmer`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const App = () => {
 
     // DELETE
     const deleteHotelzimmer = async (zimmernummer) => {
-        const response = await fetch(`http://localhost:8080/api/hotelzimmer/${zimmernummer}`, {
+        await fetch(`http://localhost:8080/api/hotelzimmer/${zimmernummer}`, {
             method: 'DELETE',
         });
         return;
