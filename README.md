@@ -9,7 +9,22 @@ This application leverages a modern tech stack to ensure a smooth, responsive ex
 - **Frontend:** React
 - **Backend:** [Your Backend Technology – Java/Spring, Python/Django, etc.]
 - **Database:** [Your Database Technology – PostgreSQL, MongoDB, etc.]
-- **Styling:** CSS & [Any additional styling frameworks]
+- **Styling:** Tailwind
+
+## React Features Utilized
+
+In this application: 
+
+- **React Hooks:** For state management and handling side effects in functional components.
+- **React Router:** Manages seamless navigation within the single-page application.
+- **Component Composition:** Promotes reusability and modularity, essential in a scalable app architecture.
+- **DataLoader:** Implemented for efficient batching and caching of data requests, reducing the number of backend calls and improving performance.
+- **Form Validation:** Utilized to ensure data integrity and user input validation. This feature enhances user experience by providing immediate feedback on form inputs, maintaining the robustness and reliability of the application data.
+- **Conditional Rendering:** Allows dynamic UI changes based on state and props.
+
+
+Together, these React features and additional tools contribute to creating a robust, maintainable, and user-friendly hotel management application.
+
 
 ## Key Features
 - **Room Management:** Add, view, edit, and delete hotel rooms with ease.
