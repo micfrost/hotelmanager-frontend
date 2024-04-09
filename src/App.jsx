@@ -29,7 +29,7 @@ const App = () => {
             },
             body: JSON.stringify(newHotelzimmer),
         });
-        return;
+
     };
 
 
@@ -42,7 +42,7 @@ const App = () => {
             },
             body: JSON.stringify(hotelzimmer),
         });
-        return;
+
     };
 
     // DELETE
@@ -50,7 +50,7 @@ const App = () => {
         await fetch(`http://localhost:8080/api/hotelzimmer/${zimmernummer}`, {
             method: 'DELETE',
         });
-        return;
+
     };
 
 
