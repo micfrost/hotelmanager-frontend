@@ -7,8 +7,8 @@ Welcome to the repository for the Hotel Management Application, designed exclusi
 This application leverages a modern tech stack to ensure a smooth, responsive experience:
 
 - **Frontend:** React
-- **Backend:** [Your Backend Technology – Java/Spring, Python/Django, etc.]
-- **Database:** [Your Database Technology – PostgreSQL, MongoDB, etc.]
+- **Backend:** Spring - Java
+- **Database:** PostgreSQL
 - **Styling:** Tailwind
 
 ## React Features Utilized
