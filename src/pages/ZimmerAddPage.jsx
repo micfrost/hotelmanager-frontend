@@ -15,7 +15,8 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
     const [zimmernummerError, setZimmernummerError] = useState('');
     const [zimmergroesse, setZimmergroesse] = useState('');
     const [minibar, setMinibar] = useState(false);
-    const [verfuegbarkeit, setVerfuegbarkeit] = useState('frei');
+    const [verfuegbarkeit, setVerfuegbarkeit] = useState(true); // Initialize as true (or false as needed)
+
     const navigate = useNavigate();
 
     // Mapping friendly names to enum values to display in the UI
@@ -78,18 +79,24 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
     };
 
     // Form submit handler function to add a new hotelzimmer and navigate to the hotelzimmer page
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateZimmernummer(zimmernummer)) {
             return;
         }
         const enumZimmergroesse = zimmergroessenMapping[zimmergroesse]; // Convert to enum value
-        const newHotelzimmer = { zimmernummer, zimmergroesse: enumZimmergroesse, minibar, frei: verfuegbarkeit === 'frei' };
-        addHotelzimmerSubmit(newHotelzimmer);
-        navigate(`/hotelzimmer`);
-        // without reload the page the data will not be updated - to be fixed
-        window.location.reload();
+        const newHotelzimmer = { zimmernummer, zimmergroesse: enumZimmergroesse, minibar, verfuegbarkeit };
+        try {
+            await addHotelzimmerSubmit(newHotelzimmer);
+            navigate('/hotelzimmer');
+            // without reload the page the data will not be updated - to be fixed
+            window.location.reload();
+        } catch (error) {
+            console.error('Error adding hotelzimmer:', error);
+        }
     };
+
+
 
     // Render loading message while fetching data from the API
     if (loading) return <p>Loading data...</p>;
@@ -160,26 +167,24 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
                     {/* Verfügbarkeit Field */}
                     <div className='mb-4'>
                         <label className='block mb-2'>Verfügbarkeit</label>
-                        <label htmlFor='frei' className='inline mr-2'>
+                        <label htmlFor='true' className='inline mr-2'>
                             <input
                                 type='radio'
-                                id='frei'
+                                id='true'
                                 name='verfuegbarkeit'
-                                value='frei'
-                                checked={verfuegbarkeit === 'frei'}
-                                onChange={() => setVerfuegbarkeit('frei')}
+                                checked={verfuegbarkeit}
+                                onChange={() => setVerfuegbarkeit(true)}
                                 className='align-middle mr-1'
                             />
                             Frei
                         </label>
-                        <label htmlFor='besetzt' className='inline '>
+                        <label htmlFor='false' className='inline'>
                             <input
                                 type='radio'
-                                id='besetzt'
+                                id='false'
                                 name='verfuegbarkeit'
-                                value='besetzt'
-                                checked={verfuegbarkeit === 'besetzt'}
-                                onChange={() => setVerfuegbarkeit('besetzt')}
+                                checked={!verfuegbarkeit}
+                                onChange={() => setVerfuegbarkeit(false)}
                                 className='align-middle mr-1'
                             />
                             Belegt

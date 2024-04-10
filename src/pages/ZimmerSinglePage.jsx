@@ -1,20 +1,36 @@
-import {Link, useLoaderData, useNavigate, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import ZimmerSingle from "../components/ZimmerSingle.jsx";
 import PropTypes from "prop-types";
+import {useEffect, useState} from "react";
+import Spinner from "../components/Spinner.jsx";
 
 // Define a functional component to render the Single Zimmer page with the deleteHotelzimmer function as a prop
 const ZimmerSinglePage = ({deleteHotelzimmer}) => {
 
-    // Get the zimmernummer from the URL params
-    const {zimmernummer} = useParams();
-
-    // Fetch the hotelzimmer data using the zimmernummer from the URL params using the useLoaderData hook
-    const hotelzimmer = useLoaderData({params: {zimmernummer}});
-
-
     // Use the useNavigate hook to navigate to the hotelzimmer page after deleting a hotelzimmer
     const navigate = useNavigate();
 
+    // Get the zimmernummer from the URL params
+    const {zimmernummer} = useParams();
+
+    // State to track loading
+    const [isLoading, setLoading] = useState(true);
+    const [hotelzimmer, setHotelzimmer] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const data = await hotelzimmerLoader({ params: { zimmernummer } });
+                setHotelzimmer(data);
+            } catch (error) {
+                console.error('Error fetching hotelzimmer data:', error);
+                // Handle error state as well
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, [zimmernummer]);
 
     // Handler function to delete a hotelzimmer
     const onDeleteClick = () => {
@@ -28,9 +44,12 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
         window.location.reload();
     };
 
+    if (isLoading) return <Spinner />;
+
     // Render the ZimmerSinglePage component with the hotelzimmer data and the deleteHotelzimmer function
     return (
         <>
+
             <section className="bg-sky-900 px-4 py-10 h-screen flex flex-col items-center">
                 <h2 className='text-3xl font-bold text-center mb-4 text-white'>HOTELZIMMER</h2>
                 <div className="flex flex-col md:flex-row justify-center items-start md:space-x-4 mt-6">
@@ -74,18 +93,25 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
 };
 
 // Loader function to fetch the hotelzimmer data using the zimmernummer from the URL params
-const hotelzimmerLoader = async ({
-                                     params
-                                 }) => {
-    const res = await fetch(`http://localhost:8080/api/hotelzimmer/${params.zimmernummer}`);
-    return await res.json();
+const hotelzimmerLoader = async ({ params }) => {
+    try {
+        const res = await fetch(`http://localhost:8080/api/hotelzimmer/${params.zimmernummer}`);
+        if (!res.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        return await res.json();
+    } catch (error) {
+        console.error('Error fetching hotelzimmer data:', error);
+        return null; // Return null in case of error
+    }
 };
 
 
-// Define the prop types for the ZimmerSinglePage component to ensure that the correct props are passed to the component
+// Define the prop types for the ZimmerSinglePage component
 ZimmerSinglePage.propTypes = {
     deleteHotelzimmer: PropTypes.func.isRequired,
 };
+
 
 export {ZimmerSinglePage as default, hotelzimmerLoader};
 

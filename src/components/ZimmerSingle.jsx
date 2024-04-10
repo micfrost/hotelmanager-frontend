@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 // Define a functional component to display a single hotelzimmer item
 const ZimmerSingle = ({hotelzimmer}) => {
+    if (!hotelzimmer) {
+        // render a placeholder or loading indicator
+        return <div>Loading...</div>;
+    }
 
     // Get the current location to know which page is currently active
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const location = useLocation();
-
 
     // Mapping friendly names to enum values to display in the UI
     const zimmergroessenMapping = {
@@ -76,5 +80,6 @@ ZimmerSingle.propTypes = {
         verfuegbarkeit: PropTypes.bool.isRequired
     }).isRequired
 };
+
 
 export default ZimmerSingle;

@@ -21,7 +21,7 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
     // Set initial state using the enum value
     const [zimmergroesse, setZimmergroesse] = useState(zimmergroessenDisplay[hotelzimmer.zimmergroesse]);
     const [minibar, setMinibar] = useState(hotelzimmer.minibar);
-    const [verfuegbarkeit, setVerfuegbarkeit] = useState(hotelzimmer.verfuegbarkeit ? 'frei' : 'belegt');
+    const [verfuegbarkeit, setVerfuegbarkeit] = useState(hotelzimmer.verfuegbarkeit);
 
     // Handler function to submit the form data
     const handleSubmit = async (e) => {
@@ -35,7 +35,7 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
             zimmernummer: hotelzimmer.zimmernummer,
             zimmergroesse: enumValue,
             minibar,
-            verfuegbarkeit: verfuegbarkeit === 'frei'
+            verfuegbarkeit
         };
         await updateHotelzimmerSubmit(updatedHotelzimmer);
         navigate('/hotelzimmer');
@@ -90,26 +90,24 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
                     {/* Verfügbarkeit Field */}
                     <div className='mb-4'>
                         <label className='block mb-2'>Verfügbarkeit</label>
-                        <label htmlFor='frei' className='inline mr-2'>
+                        <label htmlFor='true' className='inline mr-2'>
                             <input
                                 type='radio'
-                                id='frei'
+                                id='true'
                                 name='verfuegbarkeit'
-                                value='frei'
-                                checked={verfuegbarkeit === 'frei'}
-                                onChange={() => setVerfuegbarkeit('frei')}
+                                checked={verfuegbarkeit}
+                                onChange={() => setVerfuegbarkeit(true)}
                                 className='align-middle mr-1'
                             />
                             Frei
                         </label>
-                        <label htmlFor='besetzt' className='inline'>
+                        <label htmlFor='false' className='inline'>
                             <input
                                 type='radio'
-                                id='besetzt'
+                                id='false'
                                 name='verfuegbarkeit'
-                                value='besetzt'
-                                checked={verfuegbarkeit === 'belegt'}
-                                onChange={() => setVerfuegbarkeit('belegt')}
+                                checked={!verfuegbarkeit}
+                                onChange={() => setVerfuegbarkeit(false)}
                                 className='align-middle mr-1'
                             />
                             Belegt

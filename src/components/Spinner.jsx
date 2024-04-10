@@ -21,7 +21,8 @@ const Spinner = ({ loading }) => {
   );
 };
 
-PropTypes.Spinner = {
-  loading: PropTypes.bool,
+Spinner.propTypes = {
+  loading: PropTypes.bool.isRequired,
 };
+
 export default Spinner;
