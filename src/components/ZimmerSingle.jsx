@@ -1,8 +1,19 @@
 import {Link, useLocation} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ZimmerCard = ({hotelzimmer}) => {
+const ZimmerSingle = ({hotelzimmer}) => {
     const location = useLocation();
+
+    // Mapping enum values to user-friendly names
+    const zimmergroessenMapping = {
+        'EINZELZIMMER': 'Einzelzimmer',
+        'DOPPELZIMMER': 'Doppelzimmer',
+        'SUITE': 'Suite'
+    };
+
+    // Get the user-friendly name for the zimmergroesse enum
+    const zimmergroesseDisplay = zimmergroessenMapping[hotelzimmer.zimmergroesse] || hotelzimmer.zimmergroesse;
+
 
     return (
         <div className="bg-white rounded-xl shadow-md relative">
@@ -12,14 +23,15 @@ const ZimmerCard = ({hotelzimmer}) => {
                         Zimmernummer: {hotelzimmer.zimmernummer}</div>
                     <div className="border border-gray-100 mb-5"></div>
                     <div className="mt-2 mb-2">
-                        Zimmergröße: {hotelzimmer.zimmergroesse}</div>
+                        Zimmergröße: {zimmergroesseDisplay}</div>
+
 
                     <div className="mt-2 mb-2">
                         {hotelzimmer.minibar ? "Mit einer Minibar" : "Ohne Minibar"}
                     </div>
 
-                    <div className="mt-2 mb-2">
-                        {hotelzimmer.frei ? "Das Zimmer ist frei" : "Das Zimmer ist belegt"}
+                    <div className="mt-2 mb-5">
+                        {hotelzimmer.verfuegbarkeit ? "Das Zimmer ist frei" : "Das Zimmer ist belegt"}
                     </div>
                     <div className="border border-gray-100 mb-5"></div>
                 </div>
@@ -27,7 +39,7 @@ const ZimmerCard = ({hotelzimmer}) => {
 
                 {(location.pathname === '/hotelzimmer' || location.pathname === '/') && (
                     <div className="mb-2">
-                        <div className='mt-2 mb-4'>
+                        <div className=' mb-4'>
                             <p> Das zimmer ändern oder löschen?</p>
                             <p>Siehe Detailseite</p>
 
@@ -46,13 +58,13 @@ const ZimmerCard = ({hotelzimmer}) => {
     );
 };
 
-ZimmerCard.propTypes = {
+ZimmerSingle.propTypes = {
     hotelzimmer: PropTypes.shape({
         zimmernummer: PropTypes.number.isRequired,
-        zimmergroesse: PropTypes.string.isRequired,
+        zimmergroesse: PropTypes.oneOf(['EINZELZIMMER', 'DOPPELZIMMER', 'SUITE']).isRequired,
         minibar: PropTypes.bool.isRequired,
-        frei: PropTypes.bool.isRequired
+        verfuegbarkeit: PropTypes.bool.isRequired
     }).isRequired
 };
 
-export default ZimmerCard;
+export default ZimmerSingle;

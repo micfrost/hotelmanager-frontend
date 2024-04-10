@@ -24,7 +24,7 @@ const Navbar = () => {
 
                         <div className="md:ml-auto">
                             <div className="flex space-x-2">
-                                <ZimmerSearch />
+
 
                                 <NavLink
                                     to="/hotelzimmer"
@@ -32,11 +32,13 @@ const Navbar = () => {
                                     ZIMMER LISTE
                                 </NavLink>
 
+
                                 <NavLink
                                     to="/add-hotelzimmer"
                                     className={linkClass}>
                                     NEUES ZIMMER
                                 </NavLink>
+                                <ZimmerSearch />
 
                                 <NavLink
                                     to="/login"

@@ -65,7 +65,7 @@ const ZimmerSearch = () => {
        <div>
                 {/* Search the zimmernummer */}
                 <div className="flex items-center pt-2 ">
-                    {searchRoomNumberError && <p className="font-bold text-white pt-1">{searchRoomNumberError}</p>}
+                    {searchRoomNumberError && <p className=" text-white pt-1">{searchRoomNumberError}</p>}
                     <label htmlFor="searchRoomNumber" className="text-sky-50 mr-2 "></label>
                     <input
                         type="text"

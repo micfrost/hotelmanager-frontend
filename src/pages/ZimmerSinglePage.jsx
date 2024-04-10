@@ -1,10 +1,12 @@
 import {useParams, useLoaderData, useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import ZimmerCard from "../components/ZimmerCard.jsx";
+import ZimmerSingle from "../components/ZimmerSingle.jsx";
 import PropTypes from "prop-types";
-import {toast} from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const ZimmerDetailPage = ({deleteHotelzimmer}) => {
+
+const ZimmerSinglePage = ({deleteHotelzimmer}) => {
 
     const navigate = useNavigate();
     const {zimmernummer} = useParams();
@@ -14,13 +16,10 @@ const ZimmerDetailPage = ({deleteHotelzimmer}) => {
         const confirmDelete = window.confirm(
             'Are you sure you want to delete this listing?'
         );
-
         if (!confirmDelete) return;
 
         deleteHotelzimmer(zimmernummer);
-
         navigate('/hotelzimmer');
-        window.location.reload();
         toast.success('Hotelzimmer erfolgreich gelöscht');
     };
 
@@ -28,12 +27,13 @@ const ZimmerDetailPage = ({deleteHotelzimmer}) => {
     return (
         <>
             <section className="bg-sky-900 px-4 py-10 h-screen flex flex-col items-center">
+                <ToastContainer />
                 <h2 className='text-3xl font-bold text-center mb-4 text-white'>HOTELZIMMER</h2>
 
 
                 <div className="flex flex-col md:flex-row justify-center items-start md:space-x-4 mt-6">
                     <div className="mb-4 md:mb-0">
-                        <ZimmerCard hotelzimmer={hotelzimmer}/>
+                        <ZimmerSingle hotelzimmer={hotelzimmer}/>
                     </div>
 
                     <div className='bg-white p-4 rounded-lg shadow-md'>
@@ -72,9 +72,6 @@ const ZimmerDetailPage = ({deleteHotelzimmer}) => {
 };
 
 
-ZimmerDetailPage.propTypes = {
-    deleteHotelzimmer: PropTypes.func.isRequired,
-};
 
 const hotelzimmerLoader = async ({
                                      params
@@ -84,6 +81,11 @@ const hotelzimmerLoader = async ({
     return data;
 };
 
-export {ZimmerDetailPage as default, hotelzimmerLoader};
+ZimmerSinglePage.propTypes = {
+    deleteHotelzimmer: PropTypes.func.isRequired,
+};
+
+
+export {ZimmerSinglePage as default, hotelzimmerLoader};
 
 

@@ -1,4 +1,4 @@
-import ZimmerCard from './ZimmerCard.jsx';
+import ZimmerSingle from './ZimmerSingle.jsx';
 import {useState, useEffect} from "react";
 import Spinner from "./Spinner";
 
@@ -10,10 +10,10 @@ const ZimmerList = () => {
     const [error, setError] = useState(null);
 
     // State to store filter data
-    const [selectedRoomNumber, setSelectedRoomNumber] = useState('');
+    const [selectedZimmernummer, setSelectedZimmernummer] = useState('');
     const [filterMinibar, setFilterMinibar] = useState(false);
-    const [selectedRoomType, setSelectedRoomType] = useState('all');
-    const [selectedAvailability, setSelectedAvailability] = useState('all');
+    const [selectedZimmergroesse, setSelectedZimmergroesse] = useState('alle');
+    const [selectedVerfuegbarkeit, setSelectedVerfuegbarkeit] = useState('alle');
 
     // Fetch data from the API to fill the hotelzimmerData state
     useEffect(() => {
@@ -42,11 +42,11 @@ const ZimmerList = () => {
 
     // Apply filters to the hotelzimmer data
     let listeAnzeigen = sortedHotelzimmerData.filter(hotelzimmer => {
-        if (selectedRoomNumber && hotelzimmer.zimmernummer !== Number(selectedRoomNumber)) {return false;}
-        if (selectedRoomType !== 'all' && hotelzimmer.zimmergroesse !== selectedRoomType) {return false;}
+        if (selectedZimmernummer && hotelzimmer.zimmernummer !== Number(selectedZimmernummer)) {return false;}
+        if (selectedZimmergroesse !== 'alle' && hotelzimmer.zimmergroesse !== selectedZimmergroesse) {return false;}
         if (filterMinibar && !hotelzimmer.minibar) {return false;}
-        if (selectedAvailability === 'available' && !hotelzimmer.frei) {return false;}
-        if (selectedAvailability === 'occupied' && hotelzimmer.frei) {return false;}
+        if (selectedVerfuegbarkeit === 'frei' && !hotelzimmer.frei) {return false;}
+        if (selectedVerfuegbarkeit === 'belegt' && hotelzimmer.frei) {return false;}
         return true;
     });
 
@@ -65,11 +65,11 @@ const ZimmerList = () => {
                 <div className="mb-6 text-center">
                     {/* Dropdown to select zimmernummer */}
                     <div className="mb-4">
-                        <label htmlFor="roomNumberSelect" className="text-sky-50 mr-2">Zimmer-Auswahl</label>
+                        <label htmlFor="zimmernummerSelect" className="text-sky-50 mr-2">Zimmer-Auswahl</label>
                         <select
-                            id="roomNumberSelect"
-                            value={selectedRoomNumber}
-                            onChange={(e) => setSelectedRoomNumber(e.target.value)}
+                            id="zimmernummerSelect"
+                            value={selectedZimmernummer}
+                            onChange={(e) => setSelectedZimmernummer(e.target.value)}
                             className="rounded w-28"
                         >
                             <option value="">Alle</option>
@@ -83,22 +83,22 @@ const ZimmerList = () => {
 
                     {/* Room Type Filter */}
                     <div className="mb-4">
-                        <label htmlFor="roomTypeSelect" className="text-sky-50 mr-2">Zimmergröße</label>
+                        <label htmlFor="zimmergroesseSelect" className="text-sky-50 mr-2">Zimmergröße</label>
                         <select
-                            id="roomTypeSelect"
-                            onChange={(e) => setSelectedRoomType(e.target.value)}
+                            id="zimmergroesseSelect"
+                            onChange={(e) => setSelectedZimmergroesse(e.target.value)}
                             className="rounded w-38"
                         >
-                            <option value="all">Alle</option>
-                            <option value="Einzelzimmer">Einzelzimmer</option>
-                            <option value="Doppelzimmer">Doppelzimmer</option>
-                            <option value="Suite">Suite</option>
+                            <option value="alle">Alle</option>
+                            <option value="EINZELZIMMER">Einzelzimmer</option>
+                            <option value="DOPPELZIMMER">Doppelzimmer</option>
+                            <option value="SUITE">Suite</option>
                         </select>
                     </div>
 
                     {/* Minibar Filter */}
                     <div className="mb-4">
-                        <label htmlFor="minibarFilter" className="text-sky-50 mr-2">Minibar vorhanden </label>
+                        <label htmlFor="minibarFilter" className="text-sky-50 mr-2">Nur Zimmer mit einer Minibar </label>
                         <input
                             type="checkbox"
                             id="minibarFilter"
@@ -108,41 +108,41 @@ const ZimmerList = () => {
                         />
                     </div>
 
-                    {/* Availability Status Filter */}
+                    {/* Verfuegbarkeit Status Filter */}
                     <div className="mb-4">
                         <label className="text-sky-50 mr-4">Verfügbarkeit</label>
-                        <label htmlFor="availableAll" className="text-sky-50 mr-2">
+                        <label htmlFor="verfuegbarkeitAlle" className="text-sky-50 mr-2">
                             <input
                                 type="radio"
-                                id="availableAll"
-                                name="availabilityFilter"
-                                value="all"
-                                checked={selectedAvailability === 'all'}
-                                onChange={() => setSelectedAvailability('all')}
+                                id="verfuegbarkeitAlle"
+                                name="verfuegbarkeitFilter"
+                                value="alle"
+                                checked={selectedVerfuegbarkeit === 'alle'}
+                                onChange={() => setSelectedVerfuegbarkeit('alle')}
                                 className="align-middle mr-1"
                             />
                             Alle
                         </label>
-                        <label htmlFor="available" className="text-sky-50 mr-2">
+                        <label htmlFor="frei" className="text-sky-50 mr-2">
                             <input
                                 type="radio"
-                                id="available"
-                                name="availabilityFilter"
-                                value="available"
-                                checked={selectedAvailability === 'available'}
-                                onChange={() => setSelectedAvailability('available')}
+                                id="frei"
+                                name="verfuegbarkeitFilter"
+                                value="frei"
+                                checked={selectedVerfuegbarkeit === 'frei'}
+                                onChange={() => setSelectedVerfuegbarkeit('frei')}
                                 className="align-middle mr-1"
                             />
                             Frei
                         </label>
-                        <label htmlFor="occupied" className="text-sky-50">
+                        <label htmlFor="belegt" className="text-sky-50">
                             <input
                                 type="radio"
-                                id="occupied"
-                                name="availabilityFilter"
-                                value="occupied"
-                                checked={selectedAvailability === 'occupied'}
-                                onChange={() => setSelectedAvailability('occupied')}
+                                id="belegt"
+                                name="verfuegbarkeitFilter"
+                                value="belegt"
+                                checked={selectedVerfuegbarkeit === 'belegt'}
+                                onChange={() => setSelectedVerfuegbarkeit('belegt')}
                                 className="align-middle mr-1"
                             />
                             Belegt
@@ -157,7 +157,7 @@ const ZimmerList = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {listeAnzeigen.map(hotelzimmer => (
-                                <ZimmerCard key={hotelzimmer.zimmernummer} hotelzimmer={hotelzimmer}/>
+                                <ZimmerSingle key={hotelzimmer.zimmernummer} hotelzimmer={hotelzimmer}/>
                             ))}
                         </div>
 

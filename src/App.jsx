@@ -7,18 +7,18 @@ import {
 
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage';
-import HotelzimmerListPage from "./pages/ZimmerListPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import ZimmerDetailPage, {hotelzimmerLoader} from "./pages/ZimmerDetailPage.jsx";
+import NotFoundPage from './pages/NotFoundPage';
 
-
+// CRUD OPERATIONS
+import HotelzimmerListPage from "./pages/ZimmerListPage.jsx";
+import ZimmerSinglePage, {hotelzimmerLoader} from "./pages/ZimmerSinglePage.jsx";
 import ZimmerAddPage from './pages/ZimmerAddPage.jsx';
 import ZimmerEditPage from './pages/ZimmerEditPage.jsx';
 
 const App = () => {
 
-    // CRUD
+    // CRUD OPERATIONS
 
     // CREATE
     const addHotelzimmer = async (newHotelzimmer) => {
@@ -54,35 +54,36 @@ const App = () => {
     };
 
 
-
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path='/' element={<MainLayout/>}>
                 <Route index element={<HomePage/>}/>
                 <Route path='/login' element={<LoginPage/>}/>
 
+                {/*READ*/}
                 <Route path='/hotelzimmer' element={<HotelzimmerListPage/>}/>
 
-
+                {/*CREATE*/}
                 <Route path='/add-hotelzimmer'
                        element={<ZimmerAddPage addHotelzimmerSubmit={addHotelzimmer}/>}
                        loader={hotelzimmerLoader}
                 />
 
-
+                {/*UPDATE*/}
                 <Route
                     path='/edit-hotelzimmer/:zimmernummer'
                     element={<ZimmerEditPage updateHotelzimmerSubmit={updateHotelzimmer}/>}
                     loader={hotelzimmerLoader}
                 />
 
-
+                {/*DELETE*/}
                 <Route
                     path='/hotelzimmer/:zimmernummer'
-                    element={<ZimmerDetailPage deleteHotelzimmer={deleteHotelzimmer}/>}
+                    element={<ZimmerSinglePage deleteHotelzimmer={deleteHotelzimmer}/>}
                     loader={hotelzimmerLoader}
                 />
 
+                {/*404*/}
                 <Route path='*' element={<NotFoundPage/>}/>
             </Route>
         )

@@ -1,41 +1,43 @@
-import {useState} from 'react';
-import {useLoaderData, useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { useState} from 'react';
+import { useNavigate, useLoaderData } from 'react-router-dom';
+import propTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
-const ZimmerEditPage = ({updateHotelzimmerSubmit}) => {
-    // Loading the initial hotelzimmer data using useLoaderData
+const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
     const hotelzimmer = useLoaderData();
-    const [zimmergroesse, setZimmergroesse] = useState(hotelzimmer.zimmergroesse);
-    const [minibar, setMinibar] = useState(hotelzimmer.minibar);
-    const [verfuegbarkeit, setVerfuegbarkeit] = useState(hotelzimmer.frei ? 'frei' : 'belegt');
-    const zimmergroessenOptions = ['Einzelzimmer', 'Doppelzimmer', 'Suite'];
-
     const navigate = useNavigate();
 
-    // Form submission handler
+    // Enum to display name mapping (for displaying in the dropdown)
+    const zimmergroessenDisplay = {
+        'EINZELZIMMER': 'Einzelzimmer',
+        'DOPPELZIMMER': 'Doppelzimmer',
+        'SUITE': 'Suite'
+    };
+
+    // Set initial state using the enum value
+    const [zimmergroesse, setZimmergroesse] = useState(zimmergroessenDisplay[hotelzimmer.zimmergroesse]);
+    const [minibar, setMinibar] = useState(hotelzimmer.minibar);
+    const [verfuegbarkeit, setVerfuegbarkeit] = useState(hotelzimmer.verfuegbarkeit ? 'frei' : 'belegt');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Reverse the display name to enum value for submission
+        const enumValue = Object.keys(zimmergroessenDisplay).find(key => zimmergroessenDisplay[key] === zimmergroesse);
+
         const updatedHotelzimmer = {
             zimmernummer: hotelzimmer.zimmernummer,
-            zimmergroesse,
+            zimmergroesse: enumValue,
             minibar,
-            frei: verfuegbarkeit
+            verfuegbarkeit: verfuegbarkeit === 'frei'
         };
 
-        // Submit the updated hotelzimmer details
-        updateHotelzimmerSubmit(updatedHotelzimmer);
-
-        navigate(`/hotelzimmer`);
-        window.location.reload();
-toast.success('Hotelzimmer erfolgreich geändert');
+        await updateHotelzimmerSubmit(updatedHotelzimmer);
+        navigate('/hotelzimmer');
     };
 
     return (
         <section className="bg-sky-900 px-4 py-10 h-screen flex flex-col items-center">
             <h2 className='text-3xl font-bold text-center mb-4 text-white'>HOTELZIMMER</h2>
-
 
             <div className='bg-white p-8 rounded-lg shadow-md'>
                 <div className='text-2xl font-bold mt-2 mb-2'>
@@ -44,11 +46,9 @@ toast.success('Hotelzimmer erfolgreich geändert');
                 <div className="border border-gray-100 mb-5"></div>
 
                 <form onSubmit={handleSubmit}>
-
-
                     {/* Zimmergroesse Dropdown */}
                     <div className='mb-4'>
-                        <label htmlFor='zimmergroesse' className='block  mb-2'>
+                        <label htmlFor='zimmergroesse' className='block mb-2'>
                             Zimmergröße
                         </label>
                         <select
@@ -58,16 +58,15 @@ toast.success('Hotelzimmer erfolgreich geändert');
                             className='border rounded w-full py-2 px-3'
                             required
                         >
-                            {zimmergroessenOptions.map((option, index) => (
-                                <option key={index} value={option}>{option}</option>
+                            {Object.values(zimmergroessenDisplay).map((display, index) => (
+                                <option key={index} value={display}>{display}</option>
                             ))}
                         </select>
                     </div>
 
                     {/* Minibar Field */}
                     <div className='mb-4'>
-                        <label htmlFor='minibar' className='inline
-                         mb-2 mr-2'>
+                        <label htmlFor='minibar' className='inline mb-2 mr-2'>
                             Minibar vorhanden?
                         </label>
                         <input
@@ -81,8 +80,8 @@ toast.success('Hotelzimmer erfolgreich geändert');
 
                     {/* Verfügbarkeit Field */}
                     <div className='mb-4'>
-                        <label className='block  mb-2'>Verfügbarkeit</label>
-                        <label htmlFor='frei' className='inline  mr-2'>
+                        <label className='block mb-2'>Verfügbarkeit</label>
+                        <label htmlFor='frei' className='inline mr-2'>
                             <input
                                 type='radio'
                                 id='frei'
@@ -94,7 +93,7 @@ toast.success('Hotelzimmer erfolgreich geändert');
                             />
                             Frei
                         </label>
-                        <label htmlFor='besetzt' className='inline '>
+                        <label htmlFor='besetzt' className='inline'>
                             <input
                                 type='radio'
                                 id='besetzt'
@@ -109,20 +108,20 @@ toast.success('Hotelzimmer erfolgreich geändert');
                     </div>
 
                     {/* Submit Button */}
-                    <div>
-                        <button
-                            className="h-[36px] bg-sky-700 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg text-center text-sm mr-2"
-                            type='submit'
-                        >
-                            Update Hotelzimmer
-                        </button>
-                    </div>
+                    <button
+                        type='submit'
+                        className="h-[36px] bg-sky-700 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg text-center text-sm mr-2"
+                    >
+                        Update Hotelzimmer
+                    </button>
                 </form>
-
             </div>
         </section>
-    )
-        ;
+    );
+};
+
+ZimmerEditPage.propTypes = {
+    updateHotelzimmerSubmit: propTypes.func.isRequired
 };
 
 export default ZimmerEditPage;

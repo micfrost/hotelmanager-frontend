@@ -40,7 +40,7 @@ Dive into our project's structure to explore the setup:
 - `LoginPage.jsx`: Secure login portal for staff.
 - `NotFoundPage.jsx`: Custom 404 page for non-existent routes.
 - `ZimmerAddPage.jsx`: Dedicated page for adding new hotel rooms.
-- `ZimmerDetailPage.jsx`: Detailed view of each room, with extensive information.
+- `ZimmerSinglePage.jsx`: Detailed view of each room, with extensive information.
 - `ZimmerEditPage.jsx`: Edit functionality for updating room details.
 - `ZimmerListPage.jsx`: Comprehensive listing of all hotel rooms.
 - `MainLayout.jsx`: Core layout component for a consistent UI.
@@ -68,7 +68,7 @@ Follow these simple steps to get the application running on your local machine:
 ### General Navigation
 - Use the main menu for different features.
 - Use the search bar on 'ZimmerListPage' to filter rooms by type, availability, or minibar.
-- View detailed room information on 'ZimmerDetailPage'.
+- View detailed room information on 'ZimmerSinglePage'.
 
 
 ## Author

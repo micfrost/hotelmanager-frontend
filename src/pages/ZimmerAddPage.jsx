@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify';
 import propTypes from 'prop-types';
 
 const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
@@ -15,7 +14,16 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
     const [minibar, setMinibar] = useState(false);
     const [verfuegbarkeit, setVerfuegbarkeit] = useState('frei');
     const navigate = useNavigate();
+
+    // Mapping friendly names to enum values
+    const zimmergroessenMapping = {
+        'Einzelzimmer': 'EINZELZIMMER',
+        'Doppelzimmer': 'DOPPELZIMMER',
+        'Suite': 'SUITE'
+    };
+
     const zimmergroessenOptions = ['Auswählen', 'Einzelzimmer', 'Doppelzimmer', 'Suite'];
+
 
     useEffect(() => {
         setLoading(true);
@@ -61,15 +69,16 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
         validateZimmernummer(value);
     };
 
+    // Form submission handler
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!validateZimmernummer(zimmernummer)) {
             return;
         }
-        const newHotelzimmer = {zimmernummer, zimmergroesse, minibar, frei: verfuegbarkeit === 'frei'};
+        const enumZimmergroesse = zimmergroessenMapping[zimmergroesse]; // Convert to enum value
+        const newHotelzimmer = { zimmernummer, zimmergroesse: enumZimmergroesse, minibar, frei: verfuegbarkeit === 'frei' };
         addHotelzimmerSubmit(newHotelzimmer);
-        toast.success('Hotelzimmer erfolgreich hinzugefügt');
-        navigate('/hotelzimmer');
+        navigate(`/hotelzimmer`);
         window.location.reload();
     };
 
