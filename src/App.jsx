@@ -15,6 +15,7 @@ import ZimmerSinglePage, {hotelzimmerLoader} from "./pages/ZimmerSinglePage.jsx"
 import ZimmerAddPage from './pages/ZimmerAddPage.jsx';
 import ZimmerEditPage from './pages/ZimmerEditPage.jsx';
 
+// Define the App functional component to render the application layout and routes using the RouterProvider component
 const App = () => {
 
     // CRUD OPERATIONS
@@ -88,6 +89,8 @@ const App = () => {
         )
     );
 
+    // Return the RouterProvider in order to provide the router context to the application
     return <RouterProvider router={router}/>;
 };
+
 export default App;

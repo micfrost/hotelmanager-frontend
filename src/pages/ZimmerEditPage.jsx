@@ -2,8 +2,13 @@ import { useState} from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import propTypes from 'prop-types';
 
+// Define the ZimmerEditPage functional component that renders a form to edit an existing hotelzimmer
 const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
+
+    // Fetch the hotelzimmer data from the loader data hook
     const hotelzimmer = useLoaderData();
+
+    // Navigate Hook to navigate to a different route
     const navigate = useNavigate();
 
     // Enum to display name mapping (for displaying in the dropdown)
@@ -18,21 +23,23 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
     const [minibar, setMinibar] = useState(hotelzimmer.minibar);
     const [verfuegbarkeit, setVerfuegbarkeit] = useState(hotelzimmer.verfuegbarkeit ? 'frei' : 'belegt');
 
+    // Handler function to submit the form data
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Reverse the display name to enum value for submission
+        // Find the enum value for the selected zimmergroesse
         const enumValue = Object.keys(zimmergroessenDisplay).find(key => zimmergroessenDisplay[key] === zimmergroesse);
 
+        // Create an updated hotelzimmer object with the new values
         const updatedHotelzimmer = {
             zimmernummer: hotelzimmer.zimmernummer,
             zimmergroesse: enumValue,
             minibar,
             verfuegbarkeit: verfuegbarkeit === 'frei'
         };
-
         await updateHotelzimmerSubmit(updatedHotelzimmer);
         navigate('/hotelzimmer');
+        // without reload the page the data will not be updated - to be fixed
         window.location.reload();
     };
 
@@ -47,6 +54,7 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
                 <div className="border border-gray-100 mb-5"></div>
 
                 <form onSubmit={handleSubmit}>
+
                     {/* Zimmergroesse Dropdown */}
                     <div className='mb-4'>
                         <label htmlFor='zimmergroesse' className='block mb-2'>
@@ -121,6 +129,7 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
     );
 };
 
+// Define the prop types for the component to ensure that the correct props are passed to the component
 ZimmerEditPage.propTypes = {
     updateHotelzimmerSubmit: propTypes.func.isRequired
 };

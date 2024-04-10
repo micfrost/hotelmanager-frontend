@@ -1,4 +1,5 @@
-const Navbar = () => {
+// define a functional component that returns a footer section
+const Footer = () => {
     return (
         <footer className="bg-sky-900">
 
@@ -11,4 +12,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Footer;

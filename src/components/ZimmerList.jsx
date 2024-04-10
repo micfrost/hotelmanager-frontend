@@ -2,14 +2,16 @@ import ZimmerSingle from './ZimmerSingle.jsx';
 import {useState, useEffect} from "react";
 import Spinner from "./Spinner";
 
+// Define the functional component that returns a list of hotelzimmer data
+// fetched from the API and filtered based on user input
 const ZimmerList = () => {
 
-    // State to store fetched data, empty array as initial value in order to avoid errors
+    // State to store fetched data, empty array as initial value for hotelzimmerData state variable
     const [hotelzimmerData, setHotelzimmerData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // State to store filter data
+    // State to store user input for filtering the hotelzimmer data
     const [selectedZimmernummer, setSelectedZimmernummer] = useState('');
     const [filterMinibar, setFilterMinibar] = useState(false);
     const [selectedZimmergroesse, setSelectedZimmergroesse] = useState('alle');
@@ -37,32 +39,45 @@ const ZimmerList = () => {
             });
     }, []);
 
-    // sort the data
+    // Sort the fetched data based on zimmernummer
     const sortedHotelzimmerData = hotelzimmerData.sort((a, b) => a.zimmernummer - b.zimmernummer);
 
-    // Apply filters to the hotelzimmer data
+    // Apply filters to the sorted data based on user input
     let listeAnzeigen = sortedHotelzimmerData.filter(hotelzimmer => {
-        if (selectedZimmernummer && hotelzimmer.zimmernummer !== Number(selectedZimmernummer)) {return false;}
-        if (selectedZimmergroesse !== 'alle' && hotelzimmer.zimmergroesse !== selectedZimmergroesse) {return false;}
-        if (filterMinibar && !hotelzimmer.minibar) {return false;}
-        if (selectedVerfuegbarkeit === 'frei' && !hotelzimmer.frei) {return false;}
-        if (selectedVerfuegbarkeit === 'belegt' && hotelzimmer.frei) {return false;}
+        if (selectedZimmernummer && hotelzimmer.zimmernummer !== Number(selectedZimmernummer)) {
+            return false;
+        }
+        if (selectedZimmergroesse !== 'alle' && hotelzimmer.zimmergroesse !== selectedZimmergroesse) {
+            return false;
+        }
+        if (filterMinibar && !hotelzimmer.minibar) {
+            return false;
+        }
+        if (selectedVerfuegbarkeit === 'frei' && !hotelzimmer.frei) {
+            return false;
+        }
+        if (selectedVerfuegbarkeit === 'belegt' && hotelzimmer.frei) {
+            return false;
+        }
         return true;
     });
 
+    // Render error message if there is an error fetching data from the API or reload the page
     if (error) {
         return <div className="text-center mt-5">Error: {error.message}. <button
             onClick={() => window.location.reload()}>Retry</button></div>;
     }
 
 
+    // Render the list of hotelzimmer data based on user input filters
     return (
         <section className="bg-sky-900 px-4 py-10 min-h-screen">
             <div className="container-xl lg:container m-auto">
 
+                {/* Header */}
                 <div className="text-3xl font-bold text-sky-50 mb-6 text-center ">HOTELZIMMER</div>
-
                 <div className="mb-6 text-center">
+
                     {/* Dropdown to select zimmernummer */}
                     <div className="mb-4">
                         <label htmlFor="zimmernummerSelect" className="text-sky-50 mr-2">Zimmer-Auswahl</label>
@@ -81,7 +96,7 @@ const ZimmerList = () => {
                         </select>
                     </div>
 
-                    {/* Room Type Filter */}
+                    {/* Zimmergröße Filter */}
                     <div className="mb-4">
                         <label htmlFor="zimmergroesseSelect" className="text-sky-50 mr-2">Zimmergröße</label>
                         <select
@@ -98,7 +113,8 @@ const ZimmerList = () => {
 
                     {/* Minibar Filter */}
                     <div className="mb-4">
-                        <label htmlFor="minibarFilter" className="text-sky-50 mr-2">Nur Zimmer mit einer Minibar </label>
+                        <label htmlFor="minibarFilter" className="text-sky-50 mr-2">Nur Zimmer mit einer
+                            Minibar </label>
                         <input
                             type="checkbox"
                             id="minibarFilter"
@@ -150,7 +166,7 @@ const ZimmerList = () => {
                     </div>
                 </div>
 
-
+                {/* Render Spinner component if loading is true, otherwise render the list of ZimmerSingle components */}
                 {loading ?
                     (<Spinner loading={loading}/>
                     ) : (

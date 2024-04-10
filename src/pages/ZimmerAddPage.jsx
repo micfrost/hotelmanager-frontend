@@ -2,12 +2,15 @@ import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import propTypes from 'prop-types';
 
+// Define the ZimmerAddPage functional component that renders a form to add a new hotelzimmer
 const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
+
+    // State to store fetched data and error, empty array as initial value for hotelzimmerData state variable
     const [hotelzimmerData, setHotelzimmerData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Other state variables
+    // State to store form input values and errors for validation purposes
     const [zimmernummer, setZimmernummer] = useState('');
     const [zimmernummerError, setZimmernummerError] = useState('');
     const [zimmergroesse, setZimmergroesse] = useState('');
@@ -15,16 +18,18 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
     const [verfuegbarkeit, setVerfuegbarkeit] = useState('frei');
     const navigate = useNavigate();
 
-    // Mapping friendly names to enum values
+    // Mapping friendly names to enum values to display in the UI
     const zimmergroessenMapping = {
         'Einzelzimmer': 'EINZELZIMMER',
         'Doppelzimmer': 'DOPPELZIMMER',
         'Suite': 'SUITE'
     };
 
+    // Zimmergroessen dropdown options array
     const zimmergroessenOptions = ['Auswählen', 'Einzelzimmer', 'Doppelzimmer', 'Suite'];
 
 
+    // Fetch data from the API to fill the hotelzimmerData state and handle loading and error states
     useEffect(() => {
         setLoading(true);
         setError(null);
@@ -46,30 +51,33 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
             });
     }, []);
 
+
+    // Get existing zimmernummern from the fetched data
     const existingZimmernummern = hotelzimmerData.map(hz => hz.zimmernummer);
 
+
+    // Validate zimmernummer input field
     const validateZimmernummer = (value) => {
         if (!value || isNaN(value) || Number(value) <= 0) {
             setZimmernummerError('Muss eine positive Zahl sein');
             return false;
         }
-
         if (existingZimmernummern.includes(Number(value))) {
             setZimmernummerError('Zimmer existiert bereits');
             return false;
         }
-
         setZimmernummerError('');
         return true;
     };
 
+    // Event handler function to update the zimmernummer state variable and validate the input
     const handleZimmernummerChange = (e) => {
         const value = e.target.value;
         setZimmernummer(value);
         validateZimmernummer(value);
     };
 
-    // Form submission handler
+    // Form submit handler function to add a new hotelzimmer and navigate to the hotelzimmer page
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!validateZimmernummer(zimmernummer)) {
@@ -79,13 +87,18 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
         const newHotelzimmer = { zimmernummer, zimmergroesse: enumZimmergroesse, minibar, frei: verfuegbarkeit === 'frei' };
         addHotelzimmerSubmit(newHotelzimmer);
         navigate(`/hotelzimmer`);
+        // without reload the page the data will not be updated - to be fixed
         window.location.reload();
     };
 
-    // Rendering logic considering loading and error
-    if (loading) return <p>Loading...</p>;
+    // Render loading message while fetching data from the API
+    if (loading) return <p>Loading data...</p>;
+
+    // Render error message if there is an error fetching data from the API
     if (error) return <p>Error loading data: {error.message}</p>;
 
+
+    // Render the form to add a new hotelzimmer
     return (
         <section className="bg-sky-900 px-4 py-10 min-h-screen flex flex-col items-center">
 
@@ -94,6 +107,8 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
                 <div className='text-2xl font-bold mt-2 mb-2'>Zimmer hinzufügen</div>
                 <div className="border border-gray-100 mb-5"></div>
                 <form onSubmit={handleSubmit} className='mb-4'>
+
+                    {/*Zimmernummer*/}
                     <div className='mb-4'>
                         <label htmlFor='zimmernummer' className='block mb-2'>Zimmernummer</label>
                         <input
@@ -181,6 +196,7 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
     );
 };
 
+// Define prop types for the ZimmerAddPage component to ensure that the correct props are passed to the component
 ZimmerAddPage.propTypes = {
     addHotelzimmerSubmit: propTypes.func.isRequired
 };
