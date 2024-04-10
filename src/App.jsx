@@ -7,7 +7,6 @@ import {
 
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
-import LoginPage from "./pages/LoginPage.jsx";
 import NotFoundPage from './pages/NotFoundPage';
 
 // CRUD OPERATIONS
@@ -58,7 +57,7 @@ const App = () => {
         createRoutesFromElements(
             <Route path='/' element={<MainLayout/>}>
                 <Route index element={<HomePage/>}/>
-                <Route path='/login' element={<LoginPage/>}/>
+
 
                 {/*READ*/}
                 <Route path='/hotelzimmer' element={<HotelzimmerListPage/>}/>

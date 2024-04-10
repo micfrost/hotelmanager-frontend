@@ -1,9 +1,7 @@
-import {useParams, useLoaderData, useNavigate} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {Link, useLoaderData, useNavigate, useParams} from 'react-router-dom';
 import ZimmerSingle from "../components/ZimmerSingle.jsx";
+
 import PropTypes from "prop-types";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 const ZimmerSinglePage = ({deleteHotelzimmer}) => {
@@ -16,18 +14,19 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
         const confirmDelete = window.confirm(
             'Are you sure you want to delete this listing?'
         );
+
         if (!confirmDelete) return;
 
         deleteHotelzimmer(zimmernummer);
         navigate('/hotelzimmer');
-        toast.success('Hotelzimmer erfolgreich gelöscht');
+        window.location.reload();
     };
 
 
     return (
         <>
             <section className="bg-sky-900 px-4 py-10 h-screen flex flex-col items-center">
-                <ToastContainer />
+
                 <h2 className='text-3xl font-bold text-center mb-4 text-white'>HOTELZIMMER</h2>
 
 
@@ -77,9 +76,9 @@ const hotelzimmerLoader = async ({
                                      params
                                  }) => {
     const res = await fetch(`http://localhost:8080/api/hotelzimmer/${params.zimmernummer}`);
-    const data = await res.json();
-    return data;
+    return await res.json();
 };
+
 
 ZimmerSinglePage.propTypes = {
     deleteHotelzimmer: PropTypes.func.isRequired,

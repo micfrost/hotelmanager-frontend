@@ -33,6 +33,7 @@ const ZimmerEditPage = ({ updateHotelzimmerSubmit }) => {
 
         await updateHotelzimmerSubmit(updatedHotelzimmer);
         navigate('/hotelzimmer');
+        window.location.reload();
     };
 
     return (

@@ -38,15 +38,8 @@ const Navbar = () => {
                                     className={linkClass}>
                                     NEUES ZIMMER
                                 </NavLink>
+
                                 <ZimmerSearch />
-
-                                <NavLink
-                                    to="/login"
-                                    className={linkClass}>
-                                    LOG
-                                </NavLink>
-
-
 
                             </div>
                         </div>
