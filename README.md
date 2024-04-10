@@ -75,3 +75,20 @@ Follow these simple steps to get the application running on your local machine:
 Made by Michal Frost for the "eXXellent Nights!" hotel.
 
 ---
+
+![Screenshot from 2024-04-10 23-22-19.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-19.png)
+![Screenshot from 2024-04-10 23-22-24.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-24.png)
+![Screenshot from 2024-04-10 23-22-37.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-37.png)
+![Screenshot from 2024-04-10 23-22-40.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-40.png)
+![Screenshot from 2024-04-10 23-22-47.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-47.png)
+![Screenshot from 2024-04-10 23-22-55.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-22-55.png)
+![Screenshot from 2024-04-10 23-23-05.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-05.png)
+![Screenshot from 2024-04-10 23-23-15.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-15.png)
+![Screenshot from 2024-04-10 23-23-30.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-30.png)
+![Screenshot from 2024-04-10 23-23-39.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-39.png)
+![Screenshot from 2024-04-10 23-23-43.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-43.png)
+![Screenshot from 2024-04-10 23-23-51.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-51.png)
+![Screenshot from 2024-04-10 23-23-56.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-56.png)
+![Screenshot from 2024-04-10 23-24-07.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-07.png)
+![Screenshot from 2024-04-10 23-24-14.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-14.png)
+
