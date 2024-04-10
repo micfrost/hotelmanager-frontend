@@ -1,6 +1,7 @@
 import {Link, useLocation} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+
 // Define a functional component to display a single hotelzimmer item
 const ZimmerSingle = ({hotelzimmer}) => {
     if (!hotelzimmer) {
