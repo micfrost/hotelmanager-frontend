@@ -94,6 +94,4 @@ Made by Michal Frost for the "eXXellent Nights!" hotel.
 ![Screenshot from 2024-04-10 23-23-56.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-56.png)
 ![Screenshot from 2024-04-10 23-24-07.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-07.png)
 ![Screenshot from 2024-04-10 23-24-14.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-14.png)
-
-![Screenshot from 2024-04-11 10-23-08.png](src%2Fmain%2Fresources%2FImagesDemo%2FScreenshot%20from%202024-04-11%2010-23-08.png)
-
+![Screenshot from 2024-04-11 10-23-08.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-11%2010-23-08.png)
