@@ -33,16 +33,33 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
     }, [zimmernummer]);
 
     // Handler function to delete a hotelzimmer
-    const onDeleteClick = () => {
+    const onDeleteClick = async (e) => {
+        e.preventDefault();
         const confirmDelete = window.confirm(
             'Are you sure you want to delete this listing?'
         );
         if (!confirmDelete) return;
-        deleteHotelzimmer(zimmernummer);
+
+        try {
+            await deleteHotelzimmer(zimmernummer);
+
+        // Display success message after update is successful
+        if (document.getElementById('success-message')) {
+            document.getElementById('success-message').remove();
+        }
+        const successMessage = document.createElement('p');
+        successMessage.id = 'success-message';
+        successMessage.textContent = 'Getan. Weiterleitung...';
+        successMessage.classList.add('text-green-700', 'text-center', 'mb-4', 'font-bold');
+        document.querySelector('form').insertAdjacentElement('afterend', successMessage);
+
+        // Wait for 5 seconds before redirecting to the hotelzimmer page
+        await new Promise(resolve => setTimeout(resolve, 5000));
         navigate('/hotelzimmer');
-        // without reload the page the data will not be updated - to be fixed
-        window.location.reload();
-    };
+    } catch (error) {
+        console.error('Hotelzimmer wurde nicht gelöscht: ', error);
+    }
+};
 
     if (isLoading) return <Spinner />;
 

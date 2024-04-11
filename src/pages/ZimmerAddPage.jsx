@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import propTypes from 'prop-types';
 
+
 // Define the ZimmerAddPage functional component that renders a form to add a new hotelzimmer
 const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
 
@@ -85,17 +86,29 @@ const ZimmerAddPage = ({addHotelzimmerSubmit}) => {
             return;
         }
         const enumZimmergroesse = zimmergroessenMapping[zimmergroesse]; // Convert to enum value
-        const newHotelzimmer = { zimmernummer, zimmergroesse: enumZimmergroesse, minibar, verfuegbarkeit };
+        const newHotelzimmer = {zimmernummer, zimmergroesse: enumZimmergroesse, minibar, verfuegbarkeit};
+
         try {
             await addHotelzimmerSubmit(newHotelzimmer);
+
+            // Display success message
+            if (document.getElementById('success-message')) {
+                document.getElementById('success-message').remove();
+            }
+            const successMessage = document.createElement('p');
+            successMessage.id = 'success-message';
+            successMessage.textContent = 'Getan. Weiterleitung...';
+            successMessage.classList.add('text-green-700', 'text-center', 'mb-4', 'font-bold');
+            document.querySelector('form').insertAdjacentElement('afterend', successMessage);
+            // Wait for 5 seconds before redirecting to the hotelzimmer page
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
             navigate('/hotelzimmer');
-            // without reload the page the data will not be updated - to be fixed
-            window.location.reload();
+
         } catch (error) {
-            console.error('Error adding hotelzimmer:', error);
+            console.error('Hotelzimmer wurde nicht hinzugefügt:', error);
         }
     };
-
 
 
     // Render loading message while fetching data from the API
