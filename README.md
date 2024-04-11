@@ -49,11 +49,15 @@ Follow these simple steps to get the application running on your local machine:
 
 1. **Clone the Repository:** `git clone [repository URL]`
 2. **Enter Project Directory:** `cd [project directory]`
-3. Install nodejs and npm
-3. **Install Dependencies:** `npm install`
-4. **Launch the Application:** `npm start`
-5. **Access the App:** Open your browser and go to `localhost:3000`
+3. Install lts nodejs and npm (sudo apt install nodejs) 
+4. required for the project (min node v18)
+5. use the lts -for example now lts is node v 20 (nvm use 20)
+6. **Install Dependencies:** `npm install`
+8. To installESLint - npm install -g eslint
+9. **Launch the Application in dev stage:** `npm run dev`
+10. **Access the App:** Open your browser and go to `localhost:3000`
 
+Problem by installing Node - read more here https://github.com/nvm-sh/nvm?tab=readme-ov-file
 ## How to Use
 
 ### Managing Rooms
