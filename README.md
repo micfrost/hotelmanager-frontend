@@ -28,7 +28,6 @@ Together, these React features and additional tools contribute to creating a rob
 
 ## Key Features
 - **Room Management:** Add, view, edit, and delete hotel rooms with ease.
-- **User Authentication:** Secure login system for staff members.
 - **Dynamic Search:** Filter and search for rooms based on various criteria.
 - **Responsive Design:** A UI that's compatible across various devices and screen sizes.
 - **Real-time Updates:** Immediate synchronization of room status and details.
@@ -37,7 +36,6 @@ Together, these React features and additional tools contribute to creating a rob
 Dive into our project's structure to explore the setup:
 
 - `HomePage.jsx`: Landing page, showcasing the hotel's features.
-- `LoginPage.jsx`: Secure login portal for staff.
 - `NotFoundPage.jsx`: Custom 404 page for non-existent routes.
 - `ZimmerAddPage.jsx`: Dedicated page for adding new hotel rooms.
 - `ZimmerSinglePage.jsx`: Detailed view of each room, with extensive information.
@@ -70,6 +68,10 @@ Follow these simple steps to get the application running on your local machine:
 - Use the search bar on 'ZimmerListPage' to filter rooms by type, availability, or minibar.
 - View detailed room information on 'ZimmerSinglePage'.
 
+## API Documentation
+
+Interactive API documentation is available [here](http://localhost:8080/swagger-ui.html).
+
 
 ## Author
 Made by Michal Frost for the "eXXellent Nights!" hotel.
@@ -91,4 +93,8 @@ Made by Michal Frost for the "eXXellent Nights!" hotel.
 ![Screenshot from 2024-04-10 23-23-56.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-23-56.png)
 ![Screenshot from 2024-04-10 23-24-07.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-07.png)
 ![Screenshot from 2024-04-10 23-24-14.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-14.png)
+
+![Screenshot from 2024-04-11 10-23-08.png](src%2Fmain%2Fresources%2FImagesDemo%2FScreenshot%20from%202024-04-11%2010-23-08.png)
+
+Interactive API documentation is available [here](http://localhost:8080/swagger-ui.html).
 
