@@ -49,6 +49,7 @@ Follow these simple steps to get the application running on your local machine:
 
 1. **Clone the Repository:** `git clone [repository URL]`
 2. **Enter Project Directory:** `cd [project directory]`
+3. Install nodejs and npm
 3. **Install Dependencies:** `npm install`
 4. **Launch the Application:** `npm start`
 5. **Access the App:** Open your browser and go to `localhost:3000`
@@ -67,10 +68,6 @@ Follow these simple steps to get the application running on your local machine:
 - Use the main menu for different features.
 - Use the search bar on 'ZimmerListPage' to filter rooms by type, availability, or minibar.
 - View detailed room information on 'ZimmerSinglePage'.
-
-## API Documentation
-
-Interactive API documentation is available [here](http://localhost:8080/swagger-ui.html).
 
 
 ## Author
@@ -95,6 +92,4 @@ Made by Michal Frost for the "eXXellent Nights!" hotel.
 ![Screenshot from 2024-04-10 23-24-14.png](src%2Fassets%2FImagesDemo%2FScreenshot%20from%202024-04-10%2023-24-14.png)
 
 ![Screenshot from 2024-04-11 10-23-08.png](src%2Fmain%2Fresources%2FImagesDemo%2FScreenshot%20from%202024-04-11%2010-23-08.png)
-
-Interactive API documentation is available [here](http://localhost:8080/swagger-ui.html).
 

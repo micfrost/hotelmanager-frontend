@@ -53,10 +53,10 @@ const ZimmerList = () => {
         if (filterMinibar && !hotelzimmer.minibar) {
             return false;
         }
-        if (selectedVerfuegbarkeit === 'frei' && !hotelzimmer.frei) {
+        if (selectedVerfuegbarkeit === 'frei' && !hotelzimmer.verfuegbarkeit) {
             return false;
         }
-        if (selectedVerfuegbarkeit === 'belegt' && hotelzimmer.frei) {
+        if (selectedVerfuegbarkeit === 'belegt' && hotelzimmer.verfuegbarkeit) {
             return false;
         }
         return true;
