@@ -33,33 +33,16 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
     }, [zimmernummer]);
 
     // Handler function to delete a hotelzimmer
-    const onDeleteClick = async (e) => {
-        e.preventDefault();
+    const onDeleteClick = () => {
         const confirmDelete = window.confirm(
             'Are you sure you want to delete this listing?'
         );
         if (!confirmDelete) return;
-
-        try {
-            await deleteHotelzimmer(zimmernummer);
-
-        // Display success message after update is successful
-        if (document.getElementById('success-message')) {
-            document.getElementById('success-message').remove();
-        }
-        const successMessage = document.createElement('p');
-        successMessage.id = 'success-message';
-        successMessage.textContent = 'Getan. Weiterleitung...';
-        successMessage.classList.add('text-green-700', 'text-center', 'mb-4', 'font-bold');
-        document.querySelector('form').insertAdjacentElement('afterend', successMessage);
-
-        // Wait for 5 seconds before redirecting to the hotelzimmer page
-        await new Promise(resolve => setTimeout(resolve, 5000));
-        navigate('/hotelzimmer');
-    } catch (error) {
-        console.error('Hotelzimmer wurde nicht gelöscht: ', error);
-    }
-};
+        deleteHotelzimmer(zimmernummer);
+        // pause 1 seconds before reloading the page
+        setTimeout(() => {  navigate('/hotelzimmer'); }, 1000);
+        // window.location.reload();
+    };
 
     if (isLoading) return <Spinner />;
 
@@ -112,13 +95,13 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
 // Loader function to fetch the hotelzimmer data using the zimmernummer from the URL params
 const hotelzimmerLoader = async ({ params }) => {
     try {
-        const res = await fetch(`http://localhost:8080/api/hotelzimmer/${params.zimmernummer}`);
-        if (!res.ok) {
-            throw new Error('Failed to fetch data');
+        const response = await fetch(`http://localhost:8080/api/hotelzimmer/${params.zimmernummer}`);
+        if (!response.ok) {
+            throw new Error('Daten konnten nicht abgerufen werden');
         }
-        return await res.json();
+        return await response.json();
     } catch (error) {
-        console.error('Error fetching hotelzimmer data:', error);
+        console.error('Fehler beim Abrufen der Hotelzimmerdaten: ', error);
         return null; // Return null in case of error
     }
 };

@@ -50,8 +50,8 @@ const ZimmerEditPage = ({updateHotelzimmerSubmit}) => {
                 successMessage.classList.add('text-green-700', 'text-center', 'mb-4', 'font-bold');
                 document.querySelector('form').insertAdjacentElement('afterend', successMessage);
 
-                // Wait for 5 seconds before redirecting to the hotelzimmer page
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                // Wait for 3 seconds before redirecting to the hotelzimmer page
+                await new Promise(resolve => setTimeout(resolve, 3000));
                 navigate('/hotelzimmer');
             } catch (error) {
                 console.error('Hotelzimmer wurde nicht geändert', error);

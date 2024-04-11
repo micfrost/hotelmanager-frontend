@@ -66,7 +66,6 @@ const App = () => {
                 {/*CREATE*/}
                 <Route path='/add-hotelzimmer'
                        element={<ZimmerAddPage addHotelzimmerSubmit={addHotelzimmer}/>}
-                       loader={hotelzimmerLoader}
                 />
 
                 {/*UPDATE*/}
