@@ -46,7 +46,7 @@ const ZimmerEditPage = ({updateHotelzimmerSubmit}) => {
                 }
                 const successMessage = document.createElement('p');
                 successMessage.id = 'success-message';
-                successMessage.textContent = 'Getan. Weiterleitung...';
+                successMessage.textContent = 'Erledigt. Weiterleitung...';
                 successMessage.classList.add('text-green-700', 'text-center', 'mb-4', 'font-bold');
                 document.querySelector('form').insertAdjacentElement('afterend', successMessage);
 

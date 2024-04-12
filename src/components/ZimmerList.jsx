@@ -80,7 +80,7 @@ const ZimmerList = () => {
 
                     {/* Dropdown to select zimmernummer */}
                     <div className="mb-4">
-                        <label htmlFor="zimmernummerSelect" className="text-sky-50 mr-2">Zimmer-Auswahl</label>
+                        <label htmlFor="zimmernummerSelect" className="text-sky-50 mr-2">Zimmerauswahl</label>
                         <select
                             id="zimmernummerSelect"
                             value={selectedZimmernummer}
@@ -170,7 +170,6 @@ const ZimmerList = () => {
                 {loading ?
                     (<Spinner loading={loading}/>
                     ) : (
-
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {listeAnzeigen.map(hotelzimmer => (
                                 <ZimmerSingle key={hotelzimmer.zimmernummer} hotelzimmer={hotelzimmer}/>

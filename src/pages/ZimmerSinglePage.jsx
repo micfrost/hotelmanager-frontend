@@ -35,7 +35,7 @@ const ZimmerSinglePage = ({deleteHotelzimmer}) => {
     // Handler function to delete a hotelzimmer
     const onDeleteClick = () => {
         const confirmDelete = window.confirm(
-            'Are you sure you want to delete this listing?'
+            'Bist du sicher, dass du diesen Eintrag löschen möchtest?'
         );
         if (!confirmDelete) return;
         deleteHotelzimmer(zimmernummer);

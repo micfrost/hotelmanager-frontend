@@ -40,7 +40,7 @@ const ZimmerSingle = ({hotelzimmer}) => {
 
                     {/*Minibar*/}
                     <div className="mt-2 mb-2">
-                        {hotelzimmer.minibar ? "Mit einer Minibar" : "Ohne Minibar"}
+                        {hotelzimmer.minibar ? "Mit Minibar" : "Ohne Minibar"}
                     </div>
 
                     {/*Verfügbarkeit*/}
@@ -54,7 +54,7 @@ const ZimmerSingle = ({hotelzimmer}) => {
                 {(location.pathname === '/hotelzimmer' || location.pathname === '/') && (
                     <div className="mb-2">
                         <div className=' mb-4'>
-                            <p> Das zimmer ändern oder löschen?</p>
+                            <p> Das Zimmer ändern oder löschen?</p>
                             <p>Siehe Detailseite</p>
                         </div>
                         <Link
