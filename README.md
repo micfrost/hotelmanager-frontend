@@ -1,7 +1,7 @@
 # Hotel Management Application
 
 ## Introduction
-Welcome to the repository for the Hotel Management Application, designed exclusively for the "eXXellent Nights!" hotel. This application streamlines hotel operations by providing a robust platform for managing hotel rooms and enhancing guest service efficiency.
+Welcome to the repository for the Hotel Management Application, designed exclusively for the hotel. This application streamlines hotel operations by providing a robust platform for managing hotel rooms and enhancing guest service efficiency.
 
 ## Technology Stack
 This application leverages a modern tech stack to ensure a smooth, responsive experience:
