@@ -1,4 +1,4 @@
-# Hotel Management Application for "eXXellent Nights!"
+# Hotel Management Application
 
 ## Introduction
 Welcome to the repository for the Hotel Management Application, designed exclusively for the "eXXellent Nights!" hotel. This application streamlines hotel operations by providing a robust platform for managing hotel rooms and enhancing guest service efficiency.
