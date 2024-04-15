@@ -75,7 +75,7 @@ Problem by installing Node - read more here https://github.com/nvm-sh/nvm?tab=re
 
 
 ## Author
-Made by Michal Frost for the "eXXellent Nights!" hotel.
+Made by Michal Frost for the hotel.
 
 ---
 
